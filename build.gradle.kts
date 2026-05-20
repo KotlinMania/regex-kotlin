@@ -401,7 +401,7 @@ mavenPublishing {
 // The workspace-local CodeQL runner invokes `./gradlew codeqlCompileJvm` to
 // feed a synthetic JVM-shaped commonMain compile through the CodeQL Java agent.
 val codeqlKotlinc: Configuration by configurations.creating {
-    description = "Kotlin 2.3.20 compiler (CodeQL extraction target only - not published)"
+    description = "Kotlin 2.3.21 compiler (CodeQL extraction target only - not published)"
     isCanBeResolved = true
     isCanBeConsumed = false
 }
@@ -419,8 +419,8 @@ val codeqlAndroidAar: Configuration by configurations.creating {
 }
 
 dependencies {
-    codeqlKotlinc("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.3.20")
-    codeqlSourceClasspath("org.jetbrains.kotlin:kotlin-stdlib:2.3.20")
+    codeqlKotlinc("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.3.21")
+    codeqlSourceClasspath("org.jetbrains.kotlin:kotlin-stdlib:2.3.21")
     codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.11.0")
     codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.11.0")
     codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.11.0")
@@ -429,7 +429,7 @@ dependencies {
 }
 
 tasks.register<JavaExec>("codeqlCompileJvm") {
-    description = "Compile commonMain Kotlin sources with kotlinc 2.3.20 for CodeQL extraction."
+    description = "Compile commonMain Kotlin sources with kotlinc 2.3.21 for CodeQL extraction."
     group = "verification"
 
     classpath(codeqlKotlinc)
