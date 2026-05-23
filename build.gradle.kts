@@ -194,10 +194,18 @@ kotlin {
         binaries.framework { baseName = "Regex"; xcf.add(this) }
     }
     iosSimulatorArm64 {
-        binaries.framework { baseName = "Regex"; xcf.add(this) }
+        binaries.framework {
+            baseName = "Regex"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosX64 {
-        binaries.framework { baseName = "Regex"; xcf.add(this) }
+        binaries.framework {
+            baseName = "Regex"
+            isStatic = true
+            xcf.add(this)
+        }
     }
 
     tvosArm64 {
