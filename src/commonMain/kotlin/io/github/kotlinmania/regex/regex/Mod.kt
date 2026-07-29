@@ -11,3 +11,5 @@ package io.github.kotlinmania.regex.regex
 //   `wiremock-kotlin`.
 //
 // (From `/Volumes/stuff/Projects/kotlinmania/regex-kotlin/RUST_CALLERS.md`.)
+
+private object Mod
