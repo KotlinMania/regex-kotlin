@@ -1,4 +1,4 @@
-// port-lint: source src/regex/string.rs
+// port-lint: source regex/string.rs
 package io.github.kotlinmania.regex
 
 /**
@@ -229,10 +229,10 @@ public class Regex internal constructor(
 
     /** Replaces the leftmost-first match in haystack using a function. */
     public fun replace(haystack: String, transform: (Captures) -> String): String {
-        val match = internalRegex.find(haystack) ?: return haystack
-        val captures = toCaptures(haystack, match)
+        val foundMatch = internalRegex.find(haystack) ?: return haystack
+        val captures = toCaptures(haystack, foundMatch)
         val replacement = transform(captures)
-        return haystack.replaceRange(match.range, replacement)
+        return haystack.replaceRange(foundMatch.range, replacement)
     }
 
     /** Replaces all non-overlapping matches in haystack with the given replacement. */

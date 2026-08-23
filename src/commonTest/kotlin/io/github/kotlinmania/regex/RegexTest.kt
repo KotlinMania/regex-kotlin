@@ -17,10 +17,10 @@ class RegexTest {
 
         val m = re.find(hay)
         assertNotNull(m)
-        assertEquals(0, m.start())
-        assertEquals(hay.length, m.end())
+        assertEquals(0, m.start)
+        assertEquals(hay.length, m.end)
         assertEquals(0..15, m.range)
-        assertEquals("Homer J. Simpson", m.asStr())
+        assertEquals("Homer J. Simpson", m.asStr)
 
         val caps = re.captures(hay)
         assertNotNull(caps)
@@ -35,7 +35,7 @@ class RegexTest {
         val hay = "Homer J. Simpson"
         val caps = re.captures(hay)
         assertNotNull(caps)
-        assertEquals("J", caps.name("middle")?.asStr())
+        assertEquals("J", caps.name("middle")?.asStr)
         assertEquals("J", caps["middle"]?.asStr)
 
         val (full, subs) = caps.extract()
@@ -47,7 +47,7 @@ class RegexTest {
     fun testFindIterAndCapturesIter() {
         val re = Regex.new("""[0-9]{4}-[0-9]{2}-[0-9]{2}""")
         val hay = "What do 1865-04-14, 1881-07-02, 1901-09-06 and 1963-11-22 have in common?"
-        val dates = re.findIter(hay).map { it.asStr() }.toList()
+        val dates = re.findIter(hay).map { it.asStr }.toList()
         assertEquals(
             listOf("1865-04-14", "1881-07-02", "1901-09-06", "1963-11-22"),
             dates,

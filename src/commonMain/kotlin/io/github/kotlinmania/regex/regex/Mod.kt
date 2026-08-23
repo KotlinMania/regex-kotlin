@@ -1,8 +1,5 @@
-// port-lint: source src/regex/mod.rs
+// port-lint: source regex/mod.rs
 package io.github.kotlinmania.regex.regex
-
-// pub(crate) mod bytes;
-// pub(crate) mod string;
 
 // Projected callers (Rust):
 // - `codex-kotlin`, `insta-kotlin`, `lalrpop-kotlin`, `libwebrtc-kotlin`, `once-cell-kotlin`,
