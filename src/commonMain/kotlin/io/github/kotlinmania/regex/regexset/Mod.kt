@@ -12,4 +12,9 @@ package io.github.kotlinmania.regex.regexset
 //
 // (From `/Volumes/stuff/Projects/kotlinmania/regex-kotlin/RUST_CALLERS.md`.)
 
-private object Mod
+/**
+ * Module metadata for regex::regexset submodule.
+ */
+public object RegexSetMod {
+    public const val MODULE_NAME: String = "regexset"
+}
