@@ -1,4 +1,4 @@
-// port-lint: source src/regex/string.rs
+// port-lint: source regex/string.rs
 package io.github.kotlinmania.regex
 
 /**
@@ -11,13 +11,4 @@ public data class Match(
 ) {
     /** Returns the range over the haystack of this match. */
     public val range: IntRange get() = start until end
-
-    /** Returns the starting byte offset of the match in the haystack. */
-    public fun start(): Int = start
-
-    /** Returns the ending byte offset of the match in the haystack. */
-    public fun end(): Int = end
-
-    /** Returns the matched substring. */
-    public fun asStr(): String = asStr
 }
