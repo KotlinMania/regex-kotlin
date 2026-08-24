@@ -10,7 +10,10 @@ public class RegexSet internal constructor(
 ) {
     public companion object {
         /** Create a new regex set with the given regular expressions. */
-        public fun new(exprs: Iterable<String>): RegexSet = RegexSetBuilder(exprs).build()
+        public fun new(exprs: List<String>): RegexSet = RegexSetBuilder(exprs).build()
+
+        /** Create a new regex set with the given regular expressions. */
+        public fun new(vararg exprs: String): RegexSet = RegexSetBuilder(exprs.toList()).build()
 
         /** Create a new empty regex set. */
         public fun empty(): RegexSet = RegexSet(emptyList(), emptyList())
@@ -90,8 +93,10 @@ public class SetMatches(
  * A configurable builder for a [RegexSet].
  */
 public class RegexSetBuilder(
-    private val patterns: Iterable<String>,
+    private val patterns: List<String>,
 ) {
+    public constructor(vararg patterns: String) : this(patterns.toList())
+
     private var caseInsensitive: Boolean = false
     private var multiLine: Boolean = false
     private var dotMatchesNewLine: Boolean = false
