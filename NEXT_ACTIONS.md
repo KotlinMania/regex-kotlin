@@ -5,10 +5,10 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 11/12 (91.7%)
-- **Function parity:** 63/174 matched (target 113) — 36.2%
-- **Class/type parity:** 7/60 matched (target 27) — 11.7%
-- **Combined symbol parity:** 70/234 matched (target 140) — 29.9%
-- **Average inline-code cosine:** 0.19 (function body across 8 matched files)
+- **Function parity:** 71/174 matched (target 121) — 40.8%
+- **Class/type parity:** 9/60 matched (target 29) — 15.0%
+- **Combined symbol parity:** 80/234 matched (target 150) — 34.2%
+- **Average inline-code cosine:** 0.23 (function body across 8 matched files)
 - **Average documentation cosine:** 0.33 (doc text across 8 matched files)
 - **Cheat-zeroed Files:** 2
 - **Critical Issues:** 11 files with <0.60 function similarity
@@ -86,24 +86,24 @@ Every matched file is listed below with function and type symbol parity.
 ### 6. builders
 
 - **Target:** `regex.RegexBuilder`
-- **Similarity:** 0.13
+- **Similarity:** 0.16
 - **Dependents:** 0
-- **Priority Score:** 82208.7
-- **Functions:** 13/19 matched (target 18)
-- **Missing functions:** `default`, `new`, `build_one_string`, `build_one_bytes`, `build_many_string`, `build_many_bytes`
-- **Types:** 1/3 matched (target 2)
-- **Missing types:** `Builder`, `RegexSetBuilder`
+- **Priority Score:** 12208.4
+- **Functions:** 19/19 matched (target 24)
+- **Missing functions:** _none_
+- **Types:** 2/3 matched
+- **Missing types:** `RegexSetBuilder`
 
 ### 7. pattern
 
 - **Target:** `regex.Pattern`
-- **Similarity:** 0.21
+- **Similarity:** 0.48
 - **Dependents:** 0
-- **Priority Score:** 40607.9
-- **Functions:** 1/4 matched (target 1)
-- **Missing functions:** `into_searcher`, `as_utf8_pattern`, `haystack`
-- **Types:** 1/2 matched (target 5)
-- **Missing types:** `Searcher`
+- **Priority Score:** 10605.2
+- **Functions:** 3/4 matched (target 3)
+- **Missing functions:** `haystack`
+- **Types:** 2/2 matched (target 6)
+- **Missing types:** _none_
 
 ### 8. find_byte
 
