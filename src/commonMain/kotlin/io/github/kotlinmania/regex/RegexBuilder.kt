@@ -102,22 +102,23 @@ internal class Builder(
     fun buildOneBytes(): Regex = buildOneString()
 
     fun buildManyString(): RegexSet {
-        val regexes = patterns.map { pat ->
-            RegexBuilder(pat)
-                .caseInsensitive(caseInsensitive)
-                .multiLine(multiLine)
-                .dotMatchesNewLine(dotMatchesNewLine)
-                .crlf(crlf)
-                .lineTerminator(lineTerminator)
-                .swapGreed(swapGreed)
-                .ignoreWhitespace(ignoreWhitespace)
-                .unicode(unicode)
-                .octal(octal)
-                .sizeLimit(sizeLimit)
-                .dfaSizeLimit(dfaSizeLimit)
-                .nestLimit(nestLimit)
-                .build()
-        }
+        val regexes =
+            patterns.map { pat ->
+                RegexBuilder(pat)
+                    .caseInsensitive(caseInsensitive)
+                    .multiLine(multiLine)
+                    .dotMatchesNewLine(dotMatchesNewLine)
+                    .crlf(crlf)
+                    .lineTerminator(lineTerminator)
+                    .swapGreed(swapGreed)
+                    .ignoreWhitespace(ignoreWhitespace)
+                    .unicode(unicode)
+                    .octal(octal)
+                    .sizeLimit(sizeLimit)
+                    .dfaSizeLimit(dfaSizeLimit)
+                    .nestLimit(nestLimit)
+                    .build()
+            }
         return RegexSet(regexes, patterns)
     }
 
@@ -125,8 +126,7 @@ internal class Builder(
 
     companion object {
         fun default(): Builder = Builder()
+
         fun new(patterns: Iterable<String>): Builder = Builder(patterns.toList())
     }
 }
-
-
