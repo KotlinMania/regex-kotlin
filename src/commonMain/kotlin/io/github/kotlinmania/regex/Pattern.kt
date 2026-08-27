@@ -31,6 +31,7 @@ public sealed class SearchStep {
 
 public interface Searcher {
     public val haystack: String
+
     public fun next(): SearchStep
 }
 
@@ -44,7 +45,6 @@ public class RegexSearcher(
     private val iterator: Iterator<Match> = regex.findIter(haystack).iterator()
     private var lastStepEnd: Int = 0
     private var nextMatch: Pair<Int, Int>? = null
-
 
     override fun next(): SearchStep {
         val cached = nextMatch
@@ -86,4 +86,3 @@ public fun Regex.intoSearcher(haystack: String): RegexSearcher = RegexSearcher(h
  * Reserved pattern search conversion helper.
  */
 public fun Regex.asUtf8Pattern(): Any? = null
-
