@@ -1,4 +1,4 @@
-// port-lint: tests tests/test_regexset.rs
+// port-lint: tests regex/src/regexset/string.rs
 package io.github.kotlinmania.regex
 
 import kotlin.test.Test

@@ -1,4 +1,4 @@
-// port-lint: source find_byte.rs
+// port-lint: source regex/src/find_byte.rs
 package io.github.kotlinmania.regex
 
 /**
