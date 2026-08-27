@@ -61,3 +61,72 @@ public class RegexBuilder(
         }
     }
 }
+
+/**
+ * Internal multi-pattern builder matching upstream `builders.rs`.
+ */
+internal class Builder(
+    var patterns: List<String> = emptyList(),
+) {
+    var caseInsensitive: Boolean = false
+    var multiLine: Boolean = false
+    var dotMatchesNewLine: Boolean = false
+    var crlf: Boolean = false
+    var lineTerminator: Byte = '\n'.code.toByte()
+    var swapGreed: Boolean = false
+    var ignoreWhitespace: Boolean = false
+    var unicode: Boolean = true
+    var octal: Boolean = false
+    var sizeLimit: Long = 10 * 1024 * 1024L
+    var dfaSizeLimit: Long = 2 * 1024 * 1024L
+    var nestLimit: Int = 250
+
+    fun buildOneString(): Regex {
+        val pattern = patterns.firstOrNull() ?: ""
+        return RegexBuilder(pattern)
+            .caseInsensitive(caseInsensitive)
+            .multiLine(multiLine)
+            .dotMatchesNewLine(dotMatchesNewLine)
+            .crlf(crlf)
+            .lineTerminator(lineTerminator)
+            .swapGreed(swapGreed)
+            .ignoreWhitespace(ignoreWhitespace)
+            .unicode(unicode)
+            .octal(octal)
+            .sizeLimit(sizeLimit)
+            .dfaSizeLimit(dfaSizeLimit)
+            .nestLimit(nestLimit)
+            .build()
+    }
+
+    fun buildOneBytes(): Regex = buildOneString()
+
+    fun buildManyString(): RegexSet {
+        val regexes = patterns.map { pat ->
+            RegexBuilder(pat)
+                .caseInsensitive(caseInsensitive)
+                .multiLine(multiLine)
+                .dotMatchesNewLine(dotMatchesNewLine)
+                .crlf(crlf)
+                .lineTerminator(lineTerminator)
+                .swapGreed(swapGreed)
+                .ignoreWhitespace(ignoreWhitespace)
+                .unicode(unicode)
+                .octal(octal)
+                .sizeLimit(sizeLimit)
+                .dfaSizeLimit(dfaSizeLimit)
+                .nestLimit(nestLimit)
+                .build()
+        }
+        return RegexSet(regexes, patterns)
+    }
+
+    fun buildManyBytes(): RegexSet = buildManyString()
+
+    companion object {
+        fun default(): Builder = Builder()
+        fun new(patterns: Iterable<String>): Builder = Builder(patterns.toList())
+    }
+}
+
+

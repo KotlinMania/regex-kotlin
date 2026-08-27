@@ -29,18 +29,25 @@ public sealed class SearchStep {
     public data object Done : SearchStep()
 }
 
+public interface Searcher {
+    public fun haystack(): String
+    public fun next(): SearchStep
+}
+
 /**
  * RegexSearcher implements stepping through regex matches and rejections in a string.
  */
 public class RegexSearcher(
     public val haystack: String,
     private val regex: Regex,
-) {
+) : Searcher {
     private val iterator: Iterator<Match> = regex.findIter(haystack).iterator()
     private var lastStepEnd: Int = 0
     private var nextMatch: Pair<Int, Int>? = null
 
-    public fun next(): SearchStep {
+    override fun haystack(): String = haystack
+
+    override fun next(): SearchStep {
         val cached = nextMatch
         if (cached != null) {
             nextMatch = null
@@ -70,3 +77,14 @@ public class RegexSearcher(
         }
     }
 }
+
+/**
+ * Creates a new [RegexSearcher] for this regex against the provided haystack string.
+ */
+public fun Regex.intoSearcher(haystack: String): RegexSearcher = RegexSearcher(haystack, this)
+
+/**
+ * Reserved pattern search conversion helper.
+ */
+public fun Regex.asUtf8Pattern(): Any? = null
+
