@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 11/12 (91.7%)
-- **Function parity:** 71/174 matched (target 121) — 40.8%
-- **Class/type parity:** 9/60 matched (target 29) — 15.0%
-- **Combined symbol parity:** 80/234 matched (target 150) — 34.2%
+- **Function parity:** 71/175 matched (target 121) — 40.6%
+- **Class/type parity:** 9/60 matched (target 27) — 15.0%
+- **Combined symbol parity:** 80/235 matched (target 148) — 34.0%
 - **Average inline-code cosine:** 0.23 (function body across 8 matched files)
 - **Average documentation cosine:** 0.33 (doc text across 8 matched files)
-- **Cheat-zeroed Files:** 2
+- **Cheat-zeroed Files:** 0
 - **Critical Issues:** 11 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -116,29 +116,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 9. regex.mod
-
-- **Target:** `regex.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 10. regexset.mod
-
-- **Target:** `regexset.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 11. bytes
+### 9. bytes
 
 - **Target:** `regex.Bytes [STUB]`
 - **Similarity:** 1.00
@@ -165,9 +143,10 @@ normal priority and missing-file ladders because they are wiring
 modules, not direct logic ports. Consult them for call-site routing;
 do not treat them as the next implementation target by default.
 
-### Missing
+### Matched
 
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+| Source | Target | Path |
+|--------|--------|------|
+| `regex.mod` | `regex.Mod` | `regex/mod` |
+| `regexset.mod` | `regexset.Mod` | `regexset/mod` |
 
