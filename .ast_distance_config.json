@@ -16,7 +16,11 @@
     "lint": true
   },
   "reexport_modules": [
-    "mod.rs",
-    "lib.rs"
+    "lib",
+    "mod",
+    "regex/mod",
+    "regexset/mod",
+    "regex.mod",
+    "regexset.mod"
   ]
 }
