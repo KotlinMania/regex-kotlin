@@ -1,4 +1,4 @@
-// port-lint: source regex/mod.rs
+// port-lint: source regex/src/regex/mod.rs
 package io.github.kotlinmania.regex.regex
 
 // Projected callers (Rust):
