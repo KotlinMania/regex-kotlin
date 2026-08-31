@@ -1,4 +1,4 @@
-// port-lint: source regex/src/bytes.rs
+// port-lint: source bytes.rs
 package io.github.kotlinmania.regex
 
 /*

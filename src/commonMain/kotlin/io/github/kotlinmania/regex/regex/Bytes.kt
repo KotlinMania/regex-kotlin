@@ -1,4 +1,4 @@
-// port-lint: source regex/src/regex/bytes.rs
+// port-lint: source regex/bytes.rs
 package io.github.kotlinmania.regex.regex
 
 import io.github.kotlinmania.regex.Captures

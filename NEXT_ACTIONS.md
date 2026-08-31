@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 11/22 (50.0%)
-- **Function parity:** 71/219 matched (target 121) — 32.4%
-- **Class/type parity:** 9/60 matched (target 27) — 15.0%
-- **Combined symbol parity:** 80/279 matched (target 148) — 28.7%
+- **Files Present:** 11/12 (91.7%)
+- **Function parity:** 53/97 matched (target 103) — 54.6%
+- **Class/type parity:** 9/33 matched (target 23) — 27.3%
+- **Combined symbol parity:** 62/130 matched (target 126) — 47.7%
 - **Average inline-code cosine:** 0.23 (function body across 8 matched files)
 - **Average documentation cosine:** 0.33 (doc text across 8 matched files)
 - **Cheat-zeroed Files:** 0
@@ -38,7 +38,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/21 matched (target 4)
 - **Missing types:** `Err`, `Error`, `CapturesDebugMap`, `Key`, `Value`, `Output`, `CaptureLocations`, `Locations`, `Matches`, `Item`, `CaptureMatches`, `Split`, `SplitN`, `CaptureNames`, `SubCaptureMatches`, `Replacer`, `ReplacerRef`, `NoExpand`
 
-### 2. regex.error
+### 2. error
 
 - **Target:** `regex.Error`
 - **Similarity:** 0.15
@@ -49,30 +49,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/1 matched (target 4)
 - **Missing types:** `Error`
 
-### 3. regex.regex.bytes
-
-- **Target:** `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes`
-- **Similarity:** 0.07
-- **Dependents:** 0
-- **Priority Score:** 667709.3
-- **Functions:** 11/56 matched (target 16)
-- **Missing functions:** `fmt`, `from_str`, `try_from`, `replacen`, `shortest_match`, `shortest_match_at`, `is_match_at`, `find_at`, `captures_at`, `captures_read`, `captures_read_at`, `read_captures_at`, `capture_names`, `captures_len`, `static_captures_len`, `capture_locations`, `locations`, `start`, `end`, `is_empty`, `len`, `range`, `as_bytes`, `from`, `get`, `get_match`, `name`, `extract`, `expand`, `iter`, `index`, `pos`, `next`, `count`, `size_hint`, `no_expansion`, `by_ref`, `replace_append`, `test_match_properties`, `test_empty_match`, `test_debug_output_valid_utf8`, `test_debug_output_invalid_utf8`, `test_debug_output_various_unicode`, `test_debug_output_ascii_escape`, `test_debug_output_match_in_middle`
-- **Types:** 0/21 matched (target 2)
-- **Missing types:** `Regex`, `Err`, `Error`, `Match`, `Captures`, `CapturesDebugMap`, `Key`, `Value`, `Output`, `CaptureLocations`, `Locations`, `Matches`, `Item`, `CaptureMatches`, `Split`, `SplitN`, `CaptureNames`, `SubCaptureMatches`, `Replacer`, `ReplacerRef`, `NoExpand`
-- **Tests:** 0/7 matched
-
-### 4. regexset.bytes
-
-- **Target:** `regexset.Bytes`
-- **Similarity:** 0.13
-- **Dependents:** 0
-- **Priority Score:** 202708.7
-- **Functions:** 7/21 matched (target 9)
-- **Missing functions:** `is_match_at`, `matches_at`, `matches_read_at`, `read_matches_at`, `default`, `matched_any`, `matched_all`, `matched`, `iter`, `into_iter`, `next`, `size_hint`, `next_back`, `fmt`
-- **Types:** 0/6 matched (target 2)
-- **Missing types:** `RegexSet`, `SetMatches`, `IntoIter`, `Item`, `SetMatchesIntoIter`, `SetMatchesIter`
-
-### 5. regexset.string
+### 3. regexset.string
 
 - **Target:** `regex.RegexSet`
 - **Similarity:** 0.26
@@ -83,7 +60,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/6 matched (target 4)
 - **Missing types:** `IntoIter`, `Item`, `SetMatchesIntoIter`, `SetMatchesIter`
 
-### 6. regex.builders
+### 4. builders
 
 - **Target:** `regex.RegexBuilder`
 - **Similarity:** 0.16
@@ -94,35 +71,24 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/3 matched
 - **Missing types:** `RegexSetBuilder`
 
-### 7. regex.pattern
+### 5. pattern
 
 - **Target:** `regex.Pattern`
 - **Similarity:** 0.48
 - **Dependents:** 0
 - **Priority Score:** 10605.2
-- **Functions:** 3/4 matched (target 3)
+- **Functions:** 3/4 matched (target 10)
 - **Missing functions:** `haystack`
-- **Types:** 2/2 matched (target 6)
+- **Types:** 2/2 matched (target 7)
 - **Missing types:** _none_
 
-### 8. regex.find_byte
+### 6. find_byte
 
 - **Target:** `regex.FindByte`
 - **Similarity:** 0.45
 - **Dependents:** 0
 - **Priority Score:** 205.5
 - **Functions:** 2/2 matched (target 5)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 9. regex.bytes
-
-- **Target:** `regex.Bytes [STUB]`
-- **Similarity:** 1.00
-- **Dependents:** 0
-- **Priority Score:** 0.0
-- **Functions:** 0/0 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -147,6 +113,15 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `regex.mod` | `regex.Mod` | `regex/src/regex/mod` |
-| `regexset.mod` | `regexset.Mod` | `regex/src/regexset/mod` |
+| `regex.bytes` | `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes` | `regex/bytes` |
+| `regexset.bytes` | `regexset.Bytes` | `regexset/bytes` |
+| `regex.mod` | `regex.Mod` | `regex/mod` |
+| `regexset.mod` | `regexset.Mod` | `regexset/mod` |
+| `bytes` | `regex.Bytes` | `bytes` |
+
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
 
