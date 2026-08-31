@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 11/12 (91.7%)
-- **Function parity:** 53/97 matched (target 103) — 54.6%
+- **Files Present:** 11/22 (50.0%)
+- **Function parity:** 53/140 matched (target 103) — 37.9%
 - **Class/type parity:** 9/33 matched (target 23) — 27.3%
-- **Combined symbol parity:** 62/130 matched (target 126) — 47.7%
+- **Combined symbol parity:** 62/173 matched (target 126) — 35.8%
 - **Average inline-code cosine:** 0.23 (function body across 8 matched files)
 - **Average documentation cosine:** 0.33 (doc text across 8 matched files)
 - **Cheat-zeroed Files:** 0
@@ -38,7 +38,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/21 matched (target 4)
 - **Missing types:** `Err`, `Error`, `CapturesDebugMap`, `Key`, `Value`, `Output`, `CaptureLocations`, `Locations`, `Matches`, `Item`, `CaptureMatches`, `Split`, `SplitN`, `CaptureNames`, `SubCaptureMatches`, `Replacer`, `ReplacerRef`, `NoExpand`
 
-### 2. error
+### 2. regex.error
 
 - **Target:** `regex.Error`
 - **Similarity:** 0.15
@@ -60,7 +60,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/6 matched (target 4)
 - **Missing types:** `IntoIter`, `Item`, `SetMatchesIntoIter`, `SetMatchesIter`
 
-### 4. builders
+### 4. regex.builders
 
 - **Target:** `regex.RegexBuilder`
 - **Similarity:** 0.16
@@ -71,7 +71,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/3 matched
 - **Missing types:** `RegexSetBuilder`
 
-### 5. pattern
+### 5. regex.pattern
 
 - **Target:** `regex.Pattern`
 - **Similarity:** 0.48
@@ -82,7 +82,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched (target 7)
 - **Missing types:** _none_
 
-### 6. find_byte
+### 6. regex.find_byte
 
 - **Target:** `regex.FindByte`
 - **Similarity:** 0.45
@@ -113,15 +113,16 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `regex.bytes` | `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes` | `regex/bytes` |
-| `regexset.bytes` | `regexset.Bytes` | `regexset/bytes` |
-| `regex.mod` | `regex.Mod` | `regex/mod` |
-| `regexset.mod` | `regexset.Mod` | `regexset/mod` |
-| `bytes` | `regex.Bytes` | `bytes` |
+| `regex.regex.bytes` | `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes` | `regex/src/regex/bytes` |
+| `regexset.bytes` | `regexset.Bytes` | `regex/src/regexset/bytes` |
+| `regex.mod` | `regex.Mod` | `regex/src/regex/mod` |
+| `regexset.mod` | `regexset.Mod` | `regex/src/regexset/mod` |
+| `regex.bytes` | `regex.Bytes` | `regex/src/bytes` |
 
 ### Missing
 
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+| `regex.lib` | `regex.src.Lib` | 0 | `regex/src/lib.rs` | `regex/src/Lib.kt` |
+| `tests.lib` | `regex.tests.Lib` | 0 | `regex/tests/lib.rs` | `regex/tests/Lib.kt` |
 

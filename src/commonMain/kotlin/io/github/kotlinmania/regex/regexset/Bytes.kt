@@ -1,4 +1,4 @@
-// port-lint: source regexset/bytes.rs
+// port-lint: source regex/src/regexset/bytes.rs
 package io.github.kotlinmania.regex.regexset
 
 import io.github.kotlinmania.regex.RegexSet
