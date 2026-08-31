@@ -1,4 +1,4 @@
-// port-lint: tests regex/tests/searcher.rs
+// port-lint: tests pattern.rs
 package io.github.kotlinmania.regex
 
 /*
