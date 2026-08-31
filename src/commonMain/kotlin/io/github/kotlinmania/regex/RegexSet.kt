@@ -1,4 +1,4 @@
-// port-lint: source regexset/string.rs
+// port-lint: source regex/src/regexset/string.rs
 package io.github.kotlinmania.regex
 
 /**

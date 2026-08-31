@@ -1,4 +1,4 @@
-// port-lint: source builders.rs
+// port-lint: source regex/src/builders.rs
 package io.github.kotlinmania.regex
 
 import kotlin.text.RegexOption
