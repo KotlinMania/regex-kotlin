@@ -27,6 +27,10 @@
     "regex/mod",
     "regexset/mod",
     "regex/mod.rs",
-    "regexset/mod.rs"
+    "regexset/mod.rs",
+    "regex/src/lib.rs",
+    "regex/src/bytes.rs",
+    "regex/src/regex/mod.rs",
+    "regex/src/regexset/mod.rs"
   ]
 }
