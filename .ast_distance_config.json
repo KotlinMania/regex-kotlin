@@ -2,7 +2,7 @@
   "type": "port",
   "name": "regex-kotlin",
   "source": {
-    "path": "tmp",
+    "path": "tmp/regex/src",
     "lang": "rust"
   },
   "target": {
