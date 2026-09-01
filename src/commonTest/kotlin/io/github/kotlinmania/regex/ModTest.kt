@@ -1,4 +1,4 @@
-// port-lint: tests regex/src/regex/mod.rs
+// port-lint: tests regex/mod.rs
 package io.github.kotlinmania.regex
 
 import io.github.kotlinmania.regex.regex.RegexMod
