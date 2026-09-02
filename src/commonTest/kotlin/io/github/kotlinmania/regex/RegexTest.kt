@@ -3,12 +3,91 @@ package io.github.kotlinmania.regex
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class RegexTest {
+    @Test
+    fun unclosedGroupError() {
+        assertFailsWith<Throwable> {
+            Regex.new("(")
+        }
+    }
+
+    @Test
+    fun regexString() {
+        assertEquals("""[a-zA-Z0-9]+""", Regex.new("""[a-zA-Z0-9]+""").asStr())
+        assertEquals("""[a-zA-Z0-9]+""", Regex.new("""[a-zA-Z0-9]+""").toString())
+    }
+
+    @Test
+    fun captureNames() {
+        val re = Regex.new("""(.)(?P<a>.)""")
+        assertEquals(3, re.capturesLen())
+        assertEquals(listOf(null, null, "a"), re.captureNames().toList())
+    }
+
+    @Test
+    fun captureIndex() {
+        val re = Regex.new("""^(?P<name>.+)$""")
+        val cap = re.captures("abc")
+        assertNotNull(cap)
+        assertEquals("abc", cap[0]?.asStr)
+        assertEquals("abc", cap[1]?.asStr)
+        assertEquals("abc", cap["name"]?.asStr)
+    }
+
+    @Test
+    fun captureMisc() {
+        val re = Regex.new("""(.)(?P<a>a)?(.)(?P<b>.)""")
+        val cap = re.captures("abc")
+        assertNotNull(cap)
+        assertEquals(5, cap.len())
+        assertEquals(0, cap[0]?.start)
+        assertEquals(3, cap[0]?.end)
+        assertEquals("abc", cap[0]?.asStr)
+        assertNull(cap[2])
+        assertEquals(2, cap[4]?.start)
+        assertEquals(3, cap[4]?.end)
+        assertEquals("c", cap[4]?.asStr)
+        assertNull(cap.name("a"))
+        assertEquals("c", cap.name("b")?.asStr)
+    }
+
+    @Test
+    fun subCaptureMatches() {
+        val re = Regex.new("""([a-z])(([a-z])|([0-9]))""")
+        val cap = re.captures("a5")
+        assertNotNull(cap)
+        val subs = cap.iter().toList()
+        assertEquals(5, subs.size)
+        assertNotNull(subs[0])
+        assertNotNull(subs[1])
+        assertNotNull(subs[2])
+        assertNull(subs[3])
+        assertNotNull(subs[4])
+
+        assertEquals("a5", subs[0]?.asStr)
+        assertEquals("a", subs[1]?.asStr)
+        assertEquals("5", subs[2]?.asStr)
+        assertEquals("5", subs[4]?.asStr)
+    }
+
+    @Test
+    fun replacenNoCaptures() {
+        val re = Regex.new("""[0-9]""")
+        assertEquals("age: ZZ34", re.replacen("age: 1234", 2, "Z"))
+    }
+
+    @Test
+    fun replacenWithCaptures() {
+        val re = Regex.new("""([0-9])""")
+        assertEquals("age: 1Z2Z34", re.replacen("age: 1234", 2, "\${1}Z"))
+    }
+
     @Test
     fun testBasicMatchAndFind() {
         val re = Regex.new("""Homer (.)\. Simpson""")

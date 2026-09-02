@@ -20,6 +20,9 @@ public class Captures(
     /** Returns the total number of capture groups (including the full match at index 0). */
     public fun len(): Int = groups.size
 
+    /** Returns an iterator over all capture groups. */
+    public fun iter(): Sequence<Match?> = groups.asSequence()
+
     /** Extracts the full match and sub-group matches as strings. */
     public fun extract(): Pair<String, List<String>> {
         val full = groups.firstOrNull()?.asStr.orEmpty()
