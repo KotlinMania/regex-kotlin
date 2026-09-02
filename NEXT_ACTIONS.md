@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 11/12 (91.7%)
-- **Function parity:** 53/97 matched (target 103) — 54.6%
+- **Files Present:** 11/22 (50.0%)
+- **Function parity:** 53/140 matched (target 103) — 37.9%
 - **Class/type parity:** 9/33 matched (target 23) — 27.3%
-- **Combined symbol parity:** 62/130 matched (target 126) — 47.7%
+- **Combined symbol parity:** 62/173 matched (target 126) — 35.8%
 - **Average inline-code cosine:** 0.23 (function body across 8 matched files)
 - **Average documentation cosine:** 0.33 (doc text across 8 matched files)
 - **Cheat-zeroed Files:** 0
@@ -29,7 +29,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. regex.string
 
-- **Target:** `regex.Regex`
+- **Target:** `regex.Regex [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.10
 - **Dependents:** 2
 - **Priority Score:** 2516909.0
@@ -37,10 +37,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `fmt`, `from_str`, `try_from`, `replacen`, `shortest_match`, `shortest_match_at`, `is_match_at`, `find_at`, `captures_at`, `captures_read`, `captures_read_at`, `read_captures_at`, `capture_names`, `captures_len`, `static_captures_len`, `capture_locations`, `locations`, `start`, `end`, `is_empty`, `range`, `from`, `get_match`, `expand`, `iter`, `index`, `pos`, `next`, `count`, `size_hint`, `no_expansion`, `by_ref`, `replace_append`
 - **Types:** 3/21 matched (target 4)
 - **Missing types:** `Err`, `Error`, `CapturesDebugMap`, `Key`, `Value`, `Output`, `CaptureLocations`, `Locations`, `Matches`, `Item`, `CaptureMatches`, `Split`, `SplitN`, `CaptureNames`, `SubCaptureMatches`, `Replacer`, `ReplacerRef`, `NoExpand`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `regex/string.rs` vs expected `regex/string.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `regex/string.rs` vs expected `regex/string.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `regex/string.rs` vs expected `regex/string.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:regex/string.rs` vs expected `regex/string.rs`
+- **Proposed provenance header:** `// port-lint: source regex/string.rs` (current: `// port-lint: source regex/string.rs`)
+- **Proposed provenance header:** `// port-lint: source regex/string.rs` (current: `// port-lint: source regex/string.rs`)
+- **Proposed provenance header:** `// port-lint: source regex/string.rs` (current: `// port-lint: source regex/string.rs`)
+- **Proposed provenance header:** `// port-lint: tests regex/string.rs` (current: `// port-lint: tests regex/string.rs`)
+- **Lint issues:** 4
 
-### 2. error
+### 2. regex.error
 
-- **Target:** `regex.Error`
+- **Target:** `regex.Error [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.15
 - **Dependents:** 2
 - **Priority Score:** 2030408.5
@@ -48,10 +57,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from_meta_build_error`, `fmt`
 - **Types:** 0/1 matched (target 4)
 - **Missing types:** `Error`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `error.rs` vs expected `error.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:error.rs` vs expected `error.rs`
+- **Proposed provenance header:** `// port-lint: source error.rs` (current: `// port-lint: source error.rs`)
+- **Proposed provenance header:** `// port-lint: tests error.rs` (current: `// port-lint: tests error.rs`)
+- **Lint issues:** 2
 
 ### 3. regexset.string
 
-- **Target:** `regex.RegexSet`
+- **Target:** `regex.RegexSet [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.26
 - **Dependents:** 0
 - **Priority Score:** 122707.4
@@ -59,10 +73,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `matches_read_at`, `read_matches_at`, `default`, `into_iter`, `next`, `size_hint`, `next_back`, `fmt`
 - **Types:** 2/6 matched (target 4)
 - **Missing types:** `IntoIter`, `Item`, `SetMatchesIntoIter`, `SetMatchesIter`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `regexset/string.rs` vs expected `regexset/string.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:regexset/string.rs` vs expected `regexset/string.rs`
+- **Proposed provenance header:** `// port-lint: source regexset/string.rs` (current: `// port-lint: source regexset/string.rs`)
+- **Proposed provenance header:** `// port-lint: tests regexset/string.rs` (current: `// port-lint: tests regexset/string.rs`)
+- **Lint issues:** 2
 
-### 4. builders
+### 4. regex.builders
 
-- **Target:** `regex.RegexBuilder`
+- **Target:** `regex.RegexBuilder [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.16
 - **Dependents:** 0
 - **Priority Score:** 12208.4
@@ -70,10 +89,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 2/3 matched
 - **Missing types:** `RegexSetBuilder`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `builders.rs` vs expected `builders.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:builders.rs` vs expected `builders.rs`
+- **Proposed provenance header:** `// port-lint: source builders.rs` (current: `// port-lint: source builders.rs`)
+- **Proposed provenance header:** `// port-lint: tests builders.rs` (current: `// port-lint: tests builders.rs`)
+- **Lint issues:** 2
 
-### 5. pattern
+### 5. regex.pattern
 
-- **Target:** `regex.Pattern`
+- **Target:** `regex.Pattern [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.48
 - **Dependents:** 0
 - **Priority Score:** 10605.2
@@ -81,10 +105,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `haystack`
 - **Types:** 2/2 matched (target 7)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `pattern.rs` vs expected `pattern.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:pattern.rs` vs expected `pattern.rs`
+- **Proposed provenance header:** `// port-lint: source pattern.rs` (current: `// port-lint: source pattern.rs`)
+- **Proposed provenance header:** `// port-lint: tests pattern.rs` (current: `// port-lint: tests pattern.rs`)
+- **Lint issues:** 2
 
-### 6. find_byte
+### 6. regex.find_byte
 
-- **Target:** `regex.FindByte`
+- **Target:** `regex.FindByte [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.45
 - **Dependents:** 0
 - **Priority Score:** 205.5
@@ -92,6 +121,11 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `find_byte.rs` vs expected `find_byte.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:find_byte.rs` vs expected `find_byte.rs`
+- **Proposed provenance header:** `// port-lint: source find_byte.rs` (current: `// port-lint: source find_byte.rs`)
+- **Proposed provenance header:** `// port-lint: tests find_byte.rs` (current: `// port-lint: tests find_byte.rs`)
+- **Lint issues:** 2
 
 ## Success Criteria
 
@@ -113,15 +147,16 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `regex.bytes` | `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes` | `regex/bytes` |
-| `regexset.bytes` | `regexset.Bytes` | `regexset/bytes` |
-| `regex.mod` | `regex.Mod` | `regex/mod` |
-| `regexset.mod` | `regexset.Mod` | `regexset/mod` |
-| `bytes` | `regex.Bytes` | `bytes` |
+| `regex.regex.bytes` | `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes` | `regex/src/regex/bytes` |
+| `regexset.bytes` | `regexset.Bytes` | `regex/src/regexset/bytes` |
+| `regex.mod` | `regex.Mod` | `regex/src/regex/mod` |
+| `regexset.mod` | `regexset.Mod` | `regex/src/regexset/mod` |
+| `regex.bytes` | `regex.Bytes` | `regex/src/bytes` |
 
 ### Missing
 
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+| `regex.lib` | `regex.src.Lib` | 0 | `regex/src/lib.rs` | `regex/src/Lib.kt` |
+| `tests.lib` | `regex.tests.Lib` | 0 | `regex/tests/lib.rs` | `regex/tests/Lib.kt` |
 
