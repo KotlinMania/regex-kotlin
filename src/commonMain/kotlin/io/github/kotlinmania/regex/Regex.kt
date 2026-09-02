@@ -192,10 +192,12 @@ public class Regex internal constructor(
         groups.add(fullMatch)
 
         var searchOffset = fullStart
-        matchResult.groupValues.drop(1).forEach { valStr ->
-            if (valStr.isEmpty() && !haystack.regionMatches(searchOffset, "", 0, 0)) {
+        for (i in 1 until matchResult.groupValues.size) {
+            val group = matchResult.groups[i]
+            if (group == null) {
                 groups.add(null)
             } else {
+                val valStr = group.value
                 val idx = haystack.indexOf(valStr, searchOffset)
                 if (idx >= 0 && idx <= fullEnd) {
                     groups.add(Match(idx, idx + valStr.length, valStr))
@@ -243,6 +245,45 @@ public class Regex internal constructor(
         internalRegex.replace(haystack) { matchResult ->
             transform(toCaptures(haystack, matchResult))
         }
+
+    /** Replaces at most limit non-overlapping matches in haystack with the given replacement. */
+    public fun replacen(haystack: String, limit: Int, rep: String): String {
+        var count = 0
+        return internalRegex.replace(haystack) { matchResult ->
+            if (count < limit) {
+                count++
+                var replacement = rep
+                matchResult.groupValues.forEachIndexed { idx, value ->
+                    replacement = replacement.replace("\${$idx}", value).replace("$$idx", value)
+                }
+                replacement
+            } else {
+                matchResult.value
+            }
+        }
+    }
+
+    /** Replaces at most limit non-overlapping matches in haystack using a function. */
+    public fun replacen(haystack: String, limit: Int, transform: (Captures) -> String): String {
+        var count = 0
+        return internalRegex.replace(haystack) { matchResult ->
+            if (count < limit) {
+                count++
+                transform(toCaptures(haystack, matchResult))
+            } else {
+                matchResult.value
+            }
+        }
+    }
+
+    /** Returns the total number of capture groups in this regex (including the full match at index 0). */
+    public fun capturesLen(): Int = groupNames.size
+
+    /** Returns the static number of capture groups in this regex, if known. */
+    public fun staticCapturesLen(): Int? = groupNames.size
+
+    /** Returns an iterator over the capture group names in this regex. */
+    public fun captureNames(): Sequence<String?> = groupNames.asSequence()
 
     /** Returns the original pattern string. */
     public fun asStr(): String = pattern
