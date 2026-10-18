@@ -7,7 +7,7 @@ package io.github.kotlinmania.regex.regex
 //   `test-case-kotlin`, `tracing-subscriber-kotlin`, `which-kotlin`, `wildmatch-kotlin`,
 //   `wiremock-kotlin`.
 //
-// (From `/Volumes/stuff/Projects/kotlinmania/regex-kotlin/RUST_CALLERS.md`.)
+// (From `RUST_CALLERS.md`.)
 
 /**
  * Module metadata for regex::regex submodule.
