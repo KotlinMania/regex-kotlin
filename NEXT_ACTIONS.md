@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 11/12 (91.7%)
-- **Function parity:** 58/97 matched (target 117) — 59.8%
-- **Class/type parity:** 9/33 matched (target 23) — 27.3%
-- **Combined symbol parity:** 67/130 matched (target 140) — 51.5%
-- **Average inline-code cosine:** 0.23 (function body across 8 matched files)
+- **Files Present:** 9/12 (75.0%)
+- **Function parity:** 79/97 matched (target 166) — 81.4%
+- **Class/type parity:** 18/33 matched (target 32) — 54.5%
+- **Combined symbol parity:** 97/130 matched (target 198) — 74.6%
+- **Average inline-code cosine:** 0.27 (function body across 8 matched files)
 - **Average documentation cosine:** 0.34 (doc text across 8 matched files)
 - **Cheat-zeroed Files:** 0
-- **Critical Issues:** 11 files with <0.60 function similarity
+- **Critical Issues:** 9 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -29,23 +29,23 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. regex.string
 
-- **Target:** `regex.Regex`
-- **Similarity:** 0.12
+- **Target:** `regex.Match`
+- **Similarity:** 0.35
 - **Dependents:** 2
-- **Priority Score:** 2466908.8
-- **Functions:** 20/48 matched (target 42)
-- **Missing functions:** `fmt`, `from_str`, `try_from`, `shortest_match`, `shortest_match_at`, `is_match_at`, `find_at`, `captures_at`, `captures_read`, `captures_read_at`, `read_captures_at`, `capture_locations`, `locations`, `start`, `end`, `is_empty`, `range`, `from`, `get_match`, `expand`, `index`, `pos`, `next`, `count`, `size_hint`, `no_expansion`, `by_ref`, `replace_append`
-- **Types:** 3/21 matched (target 4)
-- **Missing types:** `Err`, `Error`, `CapturesDebugMap`, `Key`, `Value`, `Output`, `CaptureLocations`, `Locations`, `Matches`, `Item`, `CaptureMatches`, `Split`, `SplitN`, `CaptureNames`, `SubCaptureMatches`, `Replacer`, `ReplacerRef`, `NoExpand`
+- **Priority Score:** 2176906.5
+- **Functions:** 40/48 matched (target 90)
+- **Missing functions:** `fmt`, `start`, `end`, `range`, `from`, `get_match`, `index`, `next`
+- **Types:** 12/21 matched (target 13)
+- **Missing types:** `Err`, `Error`, `CapturesDebugMap`, `Key`, `Value`, `Output`, `Item`, `Replacer`, `ReplacerRef`
 
 ### 2. error
 
 - **Target:** `regex.Error`
-- **Similarity:** 0.15
+- **Similarity:** 0.28
 - **Dependents:** 2
-- **Priority Score:** 2030408.5
-- **Functions:** 1/3 matched (target 10)
-- **Missing functions:** `from_meta_build_error`, `fmt`
+- **Priority Score:** 2020407.1
+- **Functions:** 2/3 matched (target 11)
+- **Missing functions:** `fmt`
 - **Types:** 0/1 matched (target 4)
 - **Missing types:** `Error`
 
@@ -115,8 +115,6 @@ do not treat them as the next implementation target by default.
 |--------|--------|------|
 | `regex.bytes` | `commonMain.kotlin.io.github.kotlinmania.regex.regex.Bytes` | `regex/bytes` |
 | `regexset.bytes` | `regexset.Bytes` | `regexset/bytes` |
-| `regex.mod` | `regex.Mod` | `regex/mod` |
-| `regexset.mod` | `regexset.Mod` | `regexset/mod` |
 | `bytes` | `regex.Bytes` | `bytes` |
 
 ### Missing
@@ -124,4 +122,6 @@ do not treat them as the next implementation target by default.
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
 | `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+| `regex.mod` | `regex.Mod` | 0 | `regex/mod.rs` | `regex/Mod.kt` |
+| `regexset.mod` | `regexset.Mod` | 0 | `regexset/mod.rs` | `regexset/Mod.kt` |
 

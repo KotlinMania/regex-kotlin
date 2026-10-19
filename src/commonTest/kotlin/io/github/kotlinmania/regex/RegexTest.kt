@@ -183,4 +183,154 @@ class RegexTest {
         assertNull(re.find(hay))
         assertNull(re.captures(hay))
     }
+
+    @Test
+    fun testShortestMatchAndShortestMatchAt() {
+        val re = Regex.new("""\d+""")
+        val hay = "abc12345def"
+        val sm = re.shortestMatch(hay)
+        assertNotNull(sm)
+        assertTrue(sm >= 4)
+
+        val smAt = re.shortestMatchAt(hay, 6)
+        assertNotNull(smAt)
+        assertTrue(smAt >= 7)
+
+        val smNone = re.shortestMatchAt(hay, 9)
+        assertNull(smNone)
+    }
+
+    @Test
+    fun testFindAtAndIsMatchAt() {
+        val re = Regex.new("""\d{2}""")
+        val hay = "a12b34c"
+        assertTrue(re.isMatchAt(hay, 0))
+        assertTrue(re.isMatchAt(hay, 1))
+        assertTrue(re.isMatchAt(hay, 3))
+        assertFalse(re.isMatchAt(hay, 5))
+
+        val m1 = re.findAt(hay, 0)
+        assertNotNull(m1)
+        assertEquals(1, m1.start)
+        assertEquals(3, m1.end)
+        assertEquals("12", m1.asStr)
+        assertEquals(2, m1.len)
+        assertFalse(m1.isEmpty())
+        assertEquals(1 until 3, m1.range)
+
+        val m2 = re.findAt(hay, 3)
+        assertNotNull(m2)
+        assertEquals(4, m2.start)
+        assertEquals(6, m2.end)
+        assertEquals("34", m2.asStr)
+
+        val mNone = re.findAt(hay, 5)
+        assertNull(mNone)
+    }
+
+    @Test
+    fun testCapturesAt() {
+        val re = Regex.new("""(?<digit>\d+)""")
+        val hay = "alpha 100 beta 200"
+        val c1 = re.capturesAt(hay, 0)
+        assertNotNull(c1)
+        assertEquals("100", c1["digit"]?.asStr)
+
+        val c2 = re.capturesAt(hay, 10)
+        assertNotNull(c2)
+        assertEquals("200", c2["digit"]?.asStr)
+
+        val cNone = re.capturesAt(hay, 18)
+        assertNull(cNone)
+
+        assertFailsWith<IllegalArgumentException> {
+            re.capturesAt(hay, 19)
+        }
+    }
+
+    @Test
+    fun testCaptureLocationsAndCapturesRead() {
+        val re = Regex.new("""(?<first>[a-z]+)=(?<second>\d+)""")
+        val locs = re.captureLocations()
+        assertEquals(3, locs.len())
+        assertEquals(locs.len(), re.locations().len())
+
+        val hay = "x=123 y=456"
+        val m = re.capturesRead(locs, hay)
+        assertNotNull(m)
+        assertEquals(0, m.start)
+        assertEquals(5, m.end)
+        assertEquals(Pair(0, 5), locs.get(0))
+        assertEquals(Pair(0, 1), locs.get(1))
+        assertEquals(Pair(2, 5), locs.get(2))
+        assertEquals(Pair(0, 1), locs.pos(1))
+        assertNull(locs.get(99))
+
+        val m2 = re.capturesReadAt(locs, hay, 5)
+        assertNotNull(m2)
+        assertEquals(6, m2.start)
+        assertEquals(11, m2.end)
+        assertEquals(Pair(6, 11), locs.get(0))
+
+        val m3 = re.readCapturesAt(locs, hay, 5)
+        assertNotNull(m3)
+    }
+
+    @Test
+    fun testCapturesExpand() {
+        val re = Regex.new("""(?<first>\w+)\s+(?<last>\w+)""")
+        val caps = re.captures("Bruce Springsteen")
+        assertNotNull(caps)
+
+        val dst = StringBuilder()
+        caps.expand("Name: \$last, \${first} (\$\$)", dst)
+        assertEquals("Name: Springsteen, Bruce ($)", dst.toString())
+    }
+
+    @Test
+    fun testReplacerAndNoExpand() {
+        val re = Regex.new("""\d+""")
+        val hay = "item 123 and 456"
+
+        val noExpandRep = NoExpand("NUM")
+        assertEquals("NUM", noExpandRep.noExpansion())
+        val replaced1 = re.replace(hay, noExpandRep)
+        assertEquals("item NUM and 456", replaced1)
+
+        val replacedAll = re.replaceAll(hay, noExpandRep)
+        assertEquals("item NUM and NUM", replacedAll)
+
+        val replacen = re.replacen(hay, 1, noExpandRep)
+        assertEquals("item NUM and 456", replacen)
+
+        val customReplacer =
+            Replacer { caps, dst ->
+                dst.append("[")
+                dst.append(caps[0]?.asStr)
+                dst.append("]")
+            }
+        val ref = customReplacer.byRef()
+        val customReplaced = re.replace(hay, ref)
+        assertEquals("item [123] and 456", customReplaced)
+    }
+
+    @Test
+    fun testCompanionFromStrAndTryFrom() {
+        val re1 = Regex.fromStr("""\w+""")
+        assertTrue(re1.isMatch("hello"))
+
+        val re2 = Regex.tryFrom("""\w+""")
+        assertTrue(re2.isMatch("world"))
+    }
+
+    @Test
+    fun testRegexErrorFactory() {
+        val syntaxErr = RegexError.fromMetaBuildError("bad pattern")
+        val syntax = syntaxErr as RegexError.Syntax
+        assertEquals("bad pattern", syntax.err)
+
+        val limitErr = RegexError.fromMetaBuildError("too big", 1024L)
+        val limit = limitErr as RegexError.CompiledTooBig
+        assertEquals(1024L, limit.limit)
+    }
 }

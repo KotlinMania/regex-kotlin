@@ -362,7 +362,7 @@ License Agreement
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:regex-kotlin:0.1.0")
+    implementation("io.github.kotlinmania:regex-kotlin:0.2.0")
 }
 ```
 
