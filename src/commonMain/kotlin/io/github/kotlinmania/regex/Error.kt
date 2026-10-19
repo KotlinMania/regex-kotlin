@@ -18,6 +18,12 @@ package io.github.kotlinmania.regex
 public sealed class RegexError(
     message: String,
 ) : Exception(message) {
+    public companion object {
+        /** Creates an error from message or size limit. */
+        public fun fromMetaBuildError(message: String, sizeLimit: Long? = null): RegexError =
+            if (sizeLimit != null) CompiledTooBig(sizeLimit) else Syntax(message)
+    }
+
     /** A syntax error. */
     public class Syntax(
         public val err: String,
